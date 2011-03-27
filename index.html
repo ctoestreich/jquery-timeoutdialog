@@ -1,0 +1,62 @@
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
+	<link href="css/jquery.ui.css" type="text/css" rel="stylesheet" />
+	<link href="css/app.css" type="text/css" rel="stylesheet" />
+	<link href="css/highlight.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div id="timeoutDialog" style="display:none;">
+ <p>Your session will timeout shortly.</p>
+ <p>
+ You will time out in <span id="countdownTargetSpan" style="font-weight:bold"></span>
+ </p>
+</div>
+<script language="javascript" type="text/javascript">
+ $(function() {
+ 	$("#timeoutDialog").timeoutdialog({
+ 		idleTimeout: 5,
+ 		idleAlert: 1,
+ 		keepAliveURL: "ajax.html",
+ 		validResponseText: 'OK',
+ 		countdownTarget: 'countdownTargetSpan',
+ 		onTimeout: function() {
+ 			window.location = "timeout.html";
+ 		},
+ 		onSignoff: function(){
+ 			window.location = "signoff.html";
+ 		}
+ 	});
+ });
+</script>
+<br />
+<center><h1>jQuery Timeout Widget</h1><center>
+<table width="95%">
+  <tr><td width="60%">
+  <pre class="brush: js;toolbar:false">
+   $(function() {
+    	$("#timeoutDialog").timeoutdialog({
+    		idleTimeout: 5,
+    		idleAlert: 1,
+    		keepAliveURL: "ajax.html",
+    		validResponseText: 'OK',
+    		countdownTarget: 'countdownTargetSpan',
+    		onTimeout: function() {
+    			window.location = "timeout.html";
+    		},
+    		onSignoff: function(){
+    			window.location = "signoff.html";
+    		}
+    	});
+ 	});
+  </pre>
+</td><td width="40%" align="center">
+  A dialog will popup in 1 minute and you will be timed out in 5 minutes
+</td></tr>
+</table>
+
+<script src="js/highlight.js" type="text/javascript" ></script>
+<script src="js/ui.timeoutdialog.js" type="text/javascript" ></script>
+</body>
+</html>
