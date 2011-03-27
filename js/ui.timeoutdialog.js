@@ -7,7 +7,9 @@
             validResponseText: 'OK',
             countdownTarget: 'countdownTargetSpan',
             onTimeout: null,
-            onSignoff: null
+            onSignoff: null,
+            buttonContinueText: 'OK',
+            buttonSignoffText: 'Sign Off'
         },
         _init: function() {
             this.counter = 0;
@@ -79,6 +81,9 @@
         },
         _createDialog:function(e) {
             var self = this;
+            var btns = {}
+            btns[self.options.buttonContinueText] = function(){ self._pingServer(); self._resetTimer(); jQuery(this).dialog("close"); }
+            btns[self.options.buttonSignoffText] = function(){ self._signoff(); }
             e.dialog({
                 zIndex: 10000,
                 autoOpen: false,
@@ -92,16 +97,7 @@
                     $(".ui-dialog-titlebar-close").hide();
                     $(".ui-dialog-titlebar").hide();
                 },
-                buttons: {
-                    'OK': function() {
-                        self._pingServer();
-                        self._resetTimer();
-                        jQuery(this).dialog("close");
-                    },
-                    'Sign Off': function() {
-                        self._signoff();
-                    }
-                }
+                buttons: btns
             });
         }
     });
